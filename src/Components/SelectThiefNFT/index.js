@@ -64,18 +64,34 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
         <button
         type="button"
         className="character-mint-button"
-        // onClick={()=> mintCharacterNFTAction(index)}
+        onClick={()=> mintThiefNFTAction(index)}
         >{`Mint ${thief.color + " " + thief.clan}`}</button>
     </div>
     ));
+
+    const mintThiefNFTAction = async (thiefID) => {
+        try {
+          if (gameContract) {
+            console.log('Minting thief NFT in progress...');
+            const mintTxn = await gameContract.mintThiefNFT(thiefID);
+            await mintTxn.wait();
+            console.log('mintTxn:', mintTxn);
+          }
+        } catch (error) {
+          console.warn('MintThiefNFTAction Error:', error);
+        }
+    };
+
     return (
-    <div className="select-character-container">
-        <h2>Which wise clan would you wish to join?</h2>
-        {thiefs.length > 0 && (
-            <div className="character-grid">{renderThiefNFTs()}</div>
-        )}
-    </div>
+        <div className="select-character-container">
+            <h2>Which wise clan would you wish to join?</h2>
+            {thiefs.length > 0 && (
+                <div className="character-grid">{renderThiefNFTs()}</div>
+            )}
+        </div>
     );
 };
+
+
 
 export default SelectThiefNFT;
