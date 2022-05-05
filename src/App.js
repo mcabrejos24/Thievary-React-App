@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import SelectThiefNFT from './Components/SelectThiefNFT';
-import { CONTRACT_ADDRESS, transformPlayerData } from './constants';import thiefABIJson from './utils/Thief.json';
+import { CONTRACT_ADDRESS, transformPlayerData } from './constants';
+import thiefABIJson from './utils/Thief.json';
 import { ethers } from 'ethers';
 
 // Constants
