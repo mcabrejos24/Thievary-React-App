@@ -94,6 +94,7 @@ const App = () => {
         console.log(error)
       }
     }
+    checkNetwork();
   }, []);
 
 

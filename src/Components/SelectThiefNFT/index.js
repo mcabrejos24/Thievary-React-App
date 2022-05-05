@@ -48,15 +48,16 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
           }
         };
 
-        const onThiefMint = async (sender, tokenId, characterIndex) => {
+        const onThiefMint = async (sender, tokenId, playerIndex) => {
             console.log(
-              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} characterIndex: ${characterIndex.toNumber()}`
+              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} playerIndex: ${playerIndex.toNumber()}`
             );
         
             if (gameContract) {
-              const thiefNFT = await gameContract.checkIfUserHasNFT();
-              console.log('ThiefNFT: ', thiefNFT);
-              setThiefNFT(transformPlayerData(thiefNFT));
+                const thiefNFT = await gameContract.checkIfUserHasNFT();
+                console.log('ThiefNFT: ', thiefNFT);
+                setThiefNFT(transformPlayerData(thiefNFT));
+                alert(`Your NFT is all done -- see it here: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`)
             }
         };
       
