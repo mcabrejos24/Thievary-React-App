@@ -4,6 +4,7 @@ import SelectThiefNFT from './Components/SelectThiefNFT';
 import { CONTRACT_ADDRESS, transformPlayerData } from './constants';
 import thiefABIJson from './utils/Thief.json';
 import { ethers } from 'ethers';
+import Arena from './Components/Arena';
 
 // Constants
 
@@ -79,6 +80,8 @@ const App = () => {
       */
     } else if (currentAccount && !thiefNFT) {
       return <SelectThiefNFT setThiefNFT={setThiefNFT} />;
+    } else if (currentAccount && thiefNFT) {
+      return <Arena thiefNFT={thiefNFT} />;
     }
   };
 
@@ -94,7 +97,7 @@ const App = () => {
         console.log(error)
       }
     }
-    checkNetwork();
+    // checkNetwork();
   }, []);
 
 
