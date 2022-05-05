@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import SelectThiefNFT from './Components/SelectThiefNFT';
-import { CONTRACT_ADDRESS } from './constants';
+import { CONTRACT_ADDRESS, transformPlayerData } from './constants';import thiefABIJson from './utils/Thief.json';
+import { ethers } from 'ethers';
 
 // Constants
 
@@ -82,7 +83,47 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
+
+    const checkNetwork = async () => {
+      try { 
+        if (window.ethereum.networkVersion !== '4') {
+          alert("Please connect to Rinkeby!")
+        }
+      } catch(error) {
+        console.log(error)
+      }
+    }
   }, []);
+
+
+  useEffect(() => {
+
+    const fetchNFTMetadata = async () => {
+      console.log('Checking for Thief NFT on address:', currentAccount);
+  
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const gameContract = new ethers.Contract(
+        CONTRACT_ADDRESS,
+        thiefABIJson.abi,
+        signer
+      );
+  
+      const txn = await gameContract.checkIfUserHasNFT();
+      if (txn.clan) {
+        console.log('User has Thief NFT');
+        setThiefNFT(transformPlayerData(txn));
+      } else {
+        console.log('No character NFT found');
+      }
+    };
+  
+    // We only want to run this, if we have a connected wallet
+    if (currentAccount) {
+      console.log('CurrentAccount:', currentAccount);
+      fetchNFTMetadata();
+    }
+  }, [currentAccount]);
 
   return (
     <div className="App">
