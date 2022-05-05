@@ -47,10 +47,32 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
             console.error('Something went wrong fetching thief NFT cards:', error);
           }
         };
+
+        const onThiefMint = async (sender, tokenId, characterIndex) => {
+            console.log(
+              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} characterIndex: ${characterIndex.toNumber()}`
+            );
+        
+            if (gameContract) {
+              const thiefNFT = await gameContract.checkIfUserHasNFT();
+              console.log('ThiefNFT: ', thiefNFT);
+              setThiefNFT(transformPlayerData(thiefNFT));
+            }
+        };
       
+        // event listener from contract
         if (gameContract) {
             getThiefClans();
+            gameContract.on('PlayerNFTMinted', onThiefMint);
         }
+
+        // clean up listener
+        return () => {
+            if (gameContract) {
+                gameContract.off('PlayerNFTMinted', onThiefMint);
+            }
+        }
+
       }, [gameContract]);
 
     // Render Methods
