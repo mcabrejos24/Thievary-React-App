@@ -1,6 +1,6 @@
 .arena-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin: auto;
   color: white;
@@ -238,4 +238,10 @@
   height: 90px;
   overflow: hidden;
   white-space: nowrap;
+}
+
+
+.sides {
+  position: relative;
+  
 }

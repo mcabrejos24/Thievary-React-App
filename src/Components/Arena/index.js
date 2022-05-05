@@ -36,22 +36,60 @@ const Arena = ({ thiefNFT }) => {
             let playerArr = [];
             for(let i=0; i<allPlayersTxn.length; i++) {
                 let playerInfo = await gameContract.getAPlayerNftDetails(allPlayersTxn[i]);
-                playerArr.push(allPlayersTxn);
+                playerArr.push(transformPlayerData(playerInfo));
             }
             setAllPlayers([...playerArr]);
+            console.log(allPlayers);
+            console.log('above');
         }
 
         if(gameContract) {
             fetchAllPlayers();
-            console.log(allPlayers);
         }
 
-    }, []);
+    }, [gameContract]);
         
+    const renderOtherPlayers = () => {
+        let finalRender = [];
+        if (allPlayers.length > 0) {
+            for (let  player of allPlayers) {
+                finalRender.push(<div className="player">
+                    <div className="image-content">
+                    <h2>{player.color + " " + player.clan}</h2>
+                    <img
+                        src={"https://gateway.pinata.cloud/ipfs/" + player.imageURI.slice(7, player.imageURI.length)}
+                        alt={`Thief ${player.clan}`}
+                    />
+                    <div className="health-bar">
+                        <progress value={player.stealsLeft} max={player.maxSteals} />
+                        <p>{`${player.stealsLeft} / ${player.maxSteals} Steals`}</p>
+                    </div>
+                    </div>
+                    <div className="stats">
+                    <h4>{`Total Daggers: ${player.daggerCount}`}</h4>
+                    </div>
+                </div>);
+            }
+          return (
+            <div className="sides">
+                { finalRender}
+            </div>
+          );
+  
+      
+      }
+    }
+
   
     return (
       <div className="arena-container">
-        {/* Boss */}
+        {/* Other Players */}
+
+        {renderOtherPlayers()}
+
+
+
+
   
     {thiefNFT && (
       <div className="players-container">
@@ -80,5 +118,5 @@ const Arena = ({ thiefNFT }) => {
       </div>
     );
   };
-  
-  export default Arena;
+
+export default Arena;
