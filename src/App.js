@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import SelectThiefNFT from './Components/SelectThiefNFT';
+import { CONTRACT_ADDRESS } from './constants';
 
 // Constants
 
