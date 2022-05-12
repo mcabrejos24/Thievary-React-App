@@ -55,65 +55,62 @@ const Arena = ({ thiefNFT }) => {
             for (let  player of allPlayers) {
                 finalRender.push(<div className="player">
                     <div className="image-content">
-                    <h2>{player.color + " " + player.clan}</h2>
-                    <img
-                        src={"https://gateway.pinata.cloud/ipfs/" + player.imageURI.slice(7, player.imageURI.length)}
-                        alt={`Thief ${player.clan}`}
-                    />
-                    <div className="health-bar">
-                        <progress value={player.stealsLeft} max={player.maxSteals} />
-                        <p>{`${player.stealsLeft} / ${player.maxSteals} Steals`}</p>
-                    </div>
+                      <h2>{player.color + " " + player.clan}</h2>
+                      <img
+                          src={"https://gateway.pinata.cloud/ipfs/" + player.imageURI.slice(7, player.imageURI.length)}
+                          alt={`Thief ${player.clan}`}
+                      />
+                      <div className="health-bar">
+                          <progress value={player.stealsLeft} max={player.maxSteals} />
+                          <p>{`${player.stealsLeft} / ${player.maxSteals} Steals`}</p>
+                        </div>
                     </div>
                     <div className="stats">
-                    <h4>{`Total Daggers: ${player.daggerCount}`}</h4>
+                      <h4>{`Total Daggers: ${player.daggerCount}`}</h4>
                     </div>
                 </div>);
             }
           return (
-            <div className="sides">
-                { finalRender}
+            <div className="players-container">
+              <h2 className="all-players-card-title">Players to steal from:</h2>
+              <div className="players-grid">
+                { finalRender }
+              </div>
             </div>
           );
   
       
       }
     }
-
-  
     return (
       <div className="arena-container">
-        {/* Other Players */}
-
-        {renderOtherPlayers()}
-
-
-
-
-  
-    {thiefNFT && (
-      <div className="players-container">
-        <div className="player-container">
-          <h2>Your Thief</h2>
-          <div className="player">
-            <div className="image-content">
-              <h2>{thiefNFT.color + " " + thiefNFT.clan}</h2>
-              <img
-                src={"https://gateway.pinata.cloud/ipfs/" + thiefNFT.imageURI.slice(7, thiefNFT.imageURI.length)}
-                alt={`Thief ${thiefNFT.clan}`}
-              />
-              <div className="health-bar">
-                <progress value={thiefNFT.stealsLeft} max={thiefNFT.maxSteals} />
-                <p>{`${thiefNFT.stealsLeft} / ${thiefNFT.maxSteals} Steals`}</p>
+        {thiefNFT && (
+          <div className="your-player-container">
+            <h2 className="player-card-title">Your Player Card:</h2>
+            <div className={`player-item ${thiefNFT.color}`} key={thiefNFT.clan}>
+              <div className='image-container'>
+                <img src={"https://gateway.pinata.cloud/ipfs/" + thiefNFT.imageURI.slice(7, thiefNFT.imageURI.length)} alt={thiefNFT.clan} />
+                <p class="player-class">Class #{thiefNFT.class.toString()}</p>
+              </div>
+              <div className="info-wrapper">
+                <div className="your-player-details">
+                  <div className="your-player-stats">
+                    <progress className="steals-left" value={thiefNFT.stealsLeft} max={thiefNFT.maxSteals} />
+                    <p className="steals-left-number">{`${thiefNFT.stealsLeft} / ${thiefNFT.maxSteals} Steals`}</p>
+                    <div className="stats">
+                      <p className="total-daggers">{`Total Daggers: ${thiefNFT.daggerCount}`}</p>
+                      <p className="total-shields">{`Total Shields: ${thiefNFT.shieldCount}`}</p>
+                    </div>
+                  </div>
+                  
+                </div>
               </div>
             </div>
-            <div className="stats">
-              <h4>{`Total Daggers: ${thiefNFT.daggerCount}`}</h4>
-            </div>
           </div>
-        </div>
-      </div>
-    )}
+        )}
+
+        {/* Other Players */}
+        {renderOtherPlayers()}
 
       </div>
     );
