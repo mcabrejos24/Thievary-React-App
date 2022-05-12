@@ -77,20 +77,27 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
       }, [gameContract]);
 
     // Render Methods
-    const renderThiefNFTs = () =>
-    thiefs.map((thief, index) => (
-    <div className="character-item" key={thief.clan}>
-        <div className="name-container">
-        <p>{thief.clan}</p>
+    const renderThiefNFTs = () => {
+      return thiefs.map((thief, index) => (
+        <div className={`thief-nft-item ${thief.color}`} key={thief.clan}>
+            <div className='image-container'>
+              <img src={"https://gateway.pinata.cloud/ipfs/" + thief.imageURI.slice(7, thief.imageURI.length)} alt={thief.clan} />
+            </div>
+            <div className="info-wrapper">
+              <div className="nft-details">
+                <h4>Clan {thief.clan}</h4>
+                <p>Class #{thief.class.toString()}</p>
+              </div>
+              <button
+                type="button"
+                className="character-mint-button"
+                onClick={()=> mintThiefNFTAction(index)}
+              >Mint</button>
+            </div>
         </div>
-        <img src={"https://gateway.pinata.cloud/ipfs/" + thief.imageURI.slice(7, thief.imageURI.length)} alt={thief.clan} />
-        <button
-        type="button"
-        className="character-mint-button"
-        onClick={()=> mintThiefNFTAction(index)}
-        >{`Mint ${thief.color + " " + thief.clan}`}</button>
-    </div>
-    ));
+      ));
+    }
+    
 
     const mintThiefNFTAction = async (thiefID) => {
         try {
@@ -106,10 +113,10 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
     };
 
     return (
-        <div className="select-character-container">
+        <div className="select-thieft-nft-container">
             <h2>Which wise clan would you wish to join?</h2>
             {thiefs.length > 0 && (
-                <div className="character-grid">{renderThiefNFTs()}</div>
+                <div className="nft-grid">{renderThiefNFTs()}</div>
             )}
         </div>
     );
