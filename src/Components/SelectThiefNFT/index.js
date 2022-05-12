@@ -6,9 +6,11 @@ import { ethers } from 'ethers';
 
 
 const SelectThiefNFT = ({ setThiefNFT }) => {
+    // varaible to store nft to options
     const [thiefs, setThiefs] = useState([]);
     const [gameContract, setGameContract] = useState(null);
 
+    // effect to load contract
     useEffect(() => {
         const { ethereum } = window;
       
@@ -27,7 +29,7 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
         }
     }, []);
 
-
+    // effect to get nft options and set up event listener for on mint
     useEffect(() => {
         const getThiefClans = async () => {
           try {
@@ -98,7 +100,7 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
       ));
     }
     
-
+    // NFT mint function
     const mintThiefNFTAction = async (thiefID) => {
         try {
           if (gameContract) {
@@ -121,7 +123,5 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
         </div>
     );
 };
-
-
 
 export default SelectThiefNFT;
