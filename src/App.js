@@ -11,8 +11,17 @@ import Arena from './Components/Arena';
 const App = () => {
   // store user's public address
   const [currentAccount, setCurrentAccount] = useState(null);
-
   const [thiefNFT, setThiefNFT] = useState(null);
+
+  const checkNetwork = async () => {
+    try { 
+      if (window.ethereum.networkVersion !== '4') {
+        alert("Please connect to Rinkeby!")
+      }
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   // make sure user has a wallet
   const checkIfWalletIsConnected = async () => {
@@ -33,6 +42,7 @@ const App = () => {
           const account = accounts[0];
           console.log('Found an authorized account:', account);
           setCurrentAccount(account);
+          checkNetwork();
         } else {
           console.log('No authorized account found');
         }
@@ -87,22 +97,10 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
-
-    const checkNetwork = async () => {
-      try { 
-        if (window.ethereum.networkVersion !== '4') {
-          alert("Please connect to Rinkeby!")
-        }
-      } catch(error) {
-        console.log(error)
-      }
-    }
-    // checkNetwork();
-  }, []);
+  });
 
 
   useEffect(() => {
-
     const fetchNFTMetadata = async () => {
       console.log('Checking for Thief NFT on address:', currentAccount);
   
@@ -115,7 +113,7 @@ const App = () => {
       );
   
       const txn = await gameContract.checkIfUserHasNFT();
-      if (txn.clan) {
+      if (txn.clan.length > 0) {
         console.log('User has Thief NFT');
         setThiefNFT(transformPlayerData(txn));
       } else {
