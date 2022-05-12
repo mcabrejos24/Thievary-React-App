@@ -1,4 +1,4 @@
-const CONTRACT_ADDRESS = '0x1564b3572bD80FB5EeD6FDda7bAed4C1dd4b8FFF';
+const CONTRACT_ADDRESS = '0xf09D50bD2E6C8df0d7785179b9e52b1b16a1C8Fa';
 
 const transformPlayerData = (playerData) => {
     return {
@@ -13,6 +13,6 @@ const transformPlayerData = (playerData) => {
         shieldCount: playerData.shieldCount,
         level: playerData.level
     };
-  };
+};
   
-  export { CONTRACT_ADDRESS, transformPlayerData };
+export { CONTRACT_ADDRESS, transformPlayerData };
