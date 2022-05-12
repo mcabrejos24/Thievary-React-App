@@ -90,7 +90,7 @@
   color: white;
 }
 
-.thief-nft-item .character-mint-button {
+.thief-nft-item .nft-mint-button {
   position: relative;
   cursor: pointer;
   border: none;
@@ -103,7 +103,7 @@
   font-size: 16px;
 }
 
-.thief-nft-item .character-mint-button:hover {
+.thief-nft-item .nft-mint-button:hover {
   background: -webkit-linear-gradient(left, #bf00ff, #f844d1);
 
 

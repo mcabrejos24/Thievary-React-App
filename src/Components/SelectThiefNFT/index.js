@@ -50,9 +50,9 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
           }
         };
 
-        const onThiefMint = async (sender, tokenId, playerIndex) => {
+        const onThiefMint = async (sender, tokenId, nftTypeIndex) => {
             console.log(
-              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} playerIndex: ${playerIndex.toNumber()}`
+              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} nftTypeIndex: ${nftTypeIndex.toNumber()}`
             );
         
             if (gameContract) {
@@ -77,7 +77,6 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
         }
 
       }, [gameContract]);
-
     // Render Methods
     const renderThiefNFTs = () => {
       return thiefs.map((thief, index) => (
@@ -92,7 +91,7 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
               </div>
               <button
                 type="button"
-                className="character-mint-button"
+                className="nft-mint-button"
                 onClick={()=> mintThiefNFTAction(index)}
               >Mint</button>
             </div>
