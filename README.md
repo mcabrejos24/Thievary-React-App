@@ -17,6 +17,8 @@ A shield item is also sent on every variable "sendShieldOnNumber" mint. The cont
 
 You can check out this project here: [https://thievary-react-app.vercel.app/]
 
+The smart contract (backend) of the project is located here: [https://github.com/mcabrejos24/Thievary-Solidity]
+
 ## Getting Started
 
 This project uses [git], [node] and [nvm]. Make sure these are all downloaded for your appropriate machine before continuing.
@@ -85,7 +87,7 @@ Any merges to master will automatically deploy to production.
 [alchemy]: https://www.alchemy.com/
 [etherscan]: https://rinkeby.etherscan.io/
 [etherscan.io]: https://etherscan.io/
-[thievary_solidity]: https://github.com/mcabrejos24/Thievary-Solidity
+[https://github.com/mcabrejos24/Thievary-Solidity]: https://github.com/mcabrejos24/Thievary-Solidity
 [metamask]: https://metamask.io/
 [vercel]: https://vercel.com/
 [Thievary]: https://thievary-react-app.vercel.app/
