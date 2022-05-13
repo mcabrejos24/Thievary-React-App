@@ -94,6 +94,16 @@ p {
 
 .players-container .all-players-card-title-wrapper {
   width: 100%;
+  margin-bottom: 15px;
+}
+
+.players-container .players-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+  grid-row-gap: 40px;
+  grid-column-gap: 40px;
 }
 
 .all-players-card-title-wrapper .all-players-card-title {
@@ -124,6 +134,7 @@ p {
   font-size: 16px;
   margin-top: 15px;
   border-radius: 15px;
+  cursor: pointer;
   background-image: linear-gradient(
     to right,
     #99f9c5 0%,
@@ -202,7 +213,6 @@ p {
 }
 
 .player-item .image-container img {
-  height: 100%;
   width: 100%;
   object-fit: cover;
 }
@@ -215,40 +225,13 @@ p {
 }
 
 
-.players-container .active-players {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .active-players .players-list {
   display: flex;
   flex-direction: column;
   max-height: 400px;
   overflow: scroll;
-}
-
-.players-list .active-player-item {
-  display: flex;
-  align-items: center;
-  background-color: #b12a5b;
-  border-radius: 8px;
-  margin: 5px;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.active-player-item .player-image {
-  width: 64px;
-  height: 64px;
-  background-color: gray;
-  margin-right: 15px;
-  border-radius: 8px;
-}
-
-.active-player-item .player-content {
-  flex-direction: column;
-  text-align: left;
 }
 
 .players-container .attack-container {
