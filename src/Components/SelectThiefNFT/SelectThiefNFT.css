@@ -1,59 +1,141 @@
-.select-character-container {
-  width: 100%;
-  height: 100%;
+.select-thieft-nft-container {
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: black;
+  padding: 20px 15px;
 }
 
-.select-character-container .character-grid {
+.select-thieft-nft-container h2 {
+  margin-bottom: 50px;
+}
+.select-thieft-nft-container .nft-grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
-  grid-row-gap: 15px;
+  grid-row-gap: 40px;
+  grid-column-gap: 40px;
 }
 
-.character-grid .character-item {
+.nft-grid .thief-nft-item {
   display: flex;
   flex-direction: column;
   position: relative;
   justify-self: center;
   align-self: center;
+  background-color: rgb(255, 0, 0);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 300px;
+	--tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.character-item img {
-  height: 300px;
-  width: 350px;
+.nft-grid .thief-nft-item.Gold {
+  background-color: #af9345;
+}
+
+.nft-grid .thief-nft-item.Silver {
+  background-color: #aeaeae;
+}
+
+.nft-grid .thief-nft-item.Teal {
+  background-color: #4e87a3;
+}
+
+.nft-grid .thief-nft-item.Purple {
+  background-color: #6e497a;
+}
+
+.thief-nft-item .image-container {
+  border: 5px solid black;
+  background-color: white;
   border-radius: 10px;
+  padding: 4px;
+}
+
+.thief-nft-item .image-container img {
+  height: 100%;
+  width: 100%;
   object-fit: cover;
 }
-
-.character-item .name-container {
-  position: absolute;
-  background-color: #838383;
-  border-radius: 5px;
-  margin: 10px;
+.thief-nft-item .info-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.character-item .name-container p {
+.thief-nft-item .info-wrapper .nft-details {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.thief-nft-item .info-wrapper .nft-details h4 {
   margin: 0;
-  padding: 5px 10px 5px 10px;
+  font-size: 30px;
   font-weight: bold;
+  color: white;
 }
 
-.character-item .character-mint-button {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background-color: rgb(32, 129, 226);
+.thief-nft-item .info-wrapper .nft-details p {
+  margin: 10px 0 0 0;
+  font-size: 20px;
   color: white;
+}
+
+.thief-nft-item .nft-mint-button {
+  position: relative;
+  cursor: pointer;
+  border: none;
+  background: -webkit-linear-gradient(left, #a200d6, #ff6fdf);
+  padding: 20px 30px;
+  border-radius: 60px 20px;
+  height: fit-content;
+  color: black;
   font-weight: bold;
   font-size: 16px;
+}
+
+.thief-nft-item .nft-mint-button:hover {
+  background: -webkit-linear-gradient(left, #bf00ff, #f844d1);
+
+
+}
+
+
+.select-thieft-nft-container .loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+}
+
+.select-thieft-nft-container .loading .indicator {
+  background-color: rgb(168, 178, 171);
+  padding: 15px 25px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.select-thieft-nft-container .loading .indicator p {
+  font-weight: bold;
+  font-size: 28px;
+  padding-left: 5px;
+}
+
+.select-thieft-nft-container .loading img {
+  width: 450px;
+  padding-top: 25px;
 }

@@ -1,145 +1,229 @@
 .arena-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   margin: auto;
   color: white;
 }
 
-.arena-container .boss-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-bottom: 50px;
-}
-
-.boss-container .boss-content {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  border-radius: 10px;
-  background-image: linear-gradient(
-    to right,
-    #ff8177 0%,
-    #ff867a 0%,
-    #ff8c7f 21%,
-    #f99185 52%,
-    #cf556c 78%,
-    #b12a5b 100%
-  );
-  background-size: 600% 600%;
-  animation: gradient-animation 8s ease infinite;
-  margin-bottom: 25px;
-}
-
-.boss-content h2 {
-  margin: 0;
-  padding: 5px 0 10px 0;
-}
-
-.boss-content .image-content,
-.player .image-content {
-  position: relative;
-}
-
-.boss-content .image-content img {
-  width: 350px;
-  height: 300px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.image-content .health-bar {
+.arena-container .loading-indicator {
+  background-color: rgb(168, 178, 171);
+  padding: 15px 25px;
+  border-radius: 15px;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30px;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.health-bar progress[value] {
+.arena-container .loading-indicator p {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.player-stats progress[value] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 100%;
 }
 
-.health-bar progress[value]::-webkit-progress-bar {
+.player-stats progress[value]::-webkit-progress-bar {
   background-color: #e5652e;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 15px;
   overflow: hidden;
 }
 
-.health-bar progress[value]::-webkit-progress-value {
+.player-stats progress[value]::-webkit-progress-value {
   background-color: #70cb1b;
 }
 
-.health-bar p {
-  position: absolute;
+p {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.player-stats {
+  position: relative;
+}
+
+.player-stats .steals-left-number {
+  position: relative;
   width: 100%;
   font-weight: bold;
   color: black;
-  bottom: -10px;
+  margin-top: 10px;
+}
+
+.player-stats .stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.player-stats .stats p {
+  font-size: 14px;
+  width: fit-content;
+  position: relative;
+  background-color: #c5c5c5;
+  color: #000;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 
 .arena-container .players-container {
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.players-container .player {
+  background-color: #70cb1b;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
-  max-height: 80%;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: gray;
+  align-items: center;
+  padding: 30px;
 }
 
-.player .image-content img {
-  width: 250px;
-  height: 300px;
+.players-container .all-players-card-title-wrapper {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.players-container .players-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+  grid-row-gap: 40px;
+  grid-column-gap: 40px;
+}
+
+.all-players-card-title-wrapper .all-players-card-title {
+  width: fit-content;
+  color: black;
+  background-color: #fff;
+  padding: 10px 20px;
   border-radius: 10px;
+  margin-left: 30px;
+}
+
+.arena-container .player-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-card-container .steal-button-wrapper {
+
+}
+
+.steal-button-wrapper .steal-button {
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    #99f9c5 0%,
+    #1fffc7 0%,
+    #45dfc5 21%,
+    #5eecf0 52%,
+    #2ed3d9 78%,
+    #02afb5 100%
+  );
+}
+
+
+.player-item, .image-container {
+  position: relative;
+}
+
+.player-item .image-container .player-class {
+  position: absolute;
+  background-color: #c5c5c5;
+  color: #000;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 5px;
+  bottom: 0;
+  left: 10px;
+}
+
+.player-card-container .player-card-title-wrapper {
+  width: 100%;
+}
+
+.player-card-container .player-card-title {
+  width: fit-content;
+  color: #fff;
+  background-color: #000;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 30px;
+}
+
+.player-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-self: center;
+  align-self: center;
+  background-color: rgb(255, 0, 0);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 300px;
+	--tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.player-item.Gold {
+  background-color: #af9345;
+}
+
+.player-item.Silver {
+  background-color: #aeaeae;
+}
+
+.player-item.Teal {
+  background-color: #4e87a3;
+}
+
+.player-item.Purple {
+  background-color: #6e497a;
+}
+
+.player-item .image-container {
+  border: 5px solid black;
+  background-color: white;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.player-item .image-container img {
+  width: 100%;
   object-fit: cover;
 }
 
-.players-container .active-players {
+.player-item .info-wrapper {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  justify-content: center;
 }
+
+
+
 
 .active-players .players-list {
   display: flex;
   flex-direction: column;
   max-height: 400px;
   overflow: scroll;
-}
-
-.players-list .active-player-item {
-  display: flex;
-  align-items: center;
-  background-color: #b12a5b;
-  border-radius: 8px;
-  margin: 5px;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.active-player-item .player-image {
-  width: 64px;
-  height: 64px;
-  background-color: gray;
-  margin-right: 15px;
-  border-radius: 8px;
-}
-
-.active-player-item .player-content {
-  flex-direction: column;
-  text-align: left;
 }
 
 .players-container .attack-container {
@@ -211,12 +295,16 @@
 
 /* Toast */
 #toast {
+  display: block;
   visibility: hidden;
   max-width: 500px;
-  height: 90px;
+  width: auto;
+  height: auto;
   margin: auto;
-  background-color: gray;
-  color: #fff;
+  background-color: #000000;
+  padding: 20px 30px;
+  margin: auto;
+  color: #ffffff;
   text-align: center;
   border-radius: 10px;
   position: fixed;
@@ -225,23 +313,122 @@
   right: 0;
   bottom: 30px;
   font-size: 17px;
-  white-space: nowrap;
 }
 
 #toast #desc {
-  display: flex;
+  display: inline;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 28px;
+  flex-wrap: wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 24px;
+  margin: 0;
   font-weight: bold;
-  height: 90px;
-  overflow: hidden;
-  white-space: nowrap;
+  height: auto;
 }
 
+#toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 2s,
+    fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s,
+    fadeout 0.5s 4.5s;
+}
 
-.sides {
-  position: relative;
-  
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes expand {
+  from {
+    min-width: 50px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+
+@keyframes expand {
+  from {
+    min-width: 50px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+@-webkit-keyframes stay {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+
+@keyframes stay {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+@-webkit-keyframes shrink {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 50px;
+  }
+}
+
+@keyframes shrink {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 50px;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 60px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 60px;
+    opacity: 0;
+  }
 }

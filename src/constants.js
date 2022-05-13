@@ -1,7 +1,8 @@
-const CONTRACT_ADDRESS = '0x1564b3572bD80FB5EeD6FDda7bAed4C1dd4b8FFF';
+const CONTRACT_ADDRESS = '0xEc61Dd17BCCe3C713d1c5F46C7d4EA0Ee14c6372';
 
 const transformPlayerData = (playerData) => {
     return {
+        itemId: playerData.itemId,
         clan: playerData.clan,
         color: playerData.color,
         imageURI: playerData.imageURI,
@@ -13,6 +14,6 @@ const transformPlayerData = (playerData) => {
         shieldCount: playerData.shieldCount,
         level: playerData.level
     };
-  };
+};
   
-  export { CONTRACT_ADDRESS, transformPlayerData };
+export { CONTRACT_ADDRESS, transformPlayerData };

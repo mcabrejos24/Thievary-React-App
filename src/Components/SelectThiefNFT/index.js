@@ -3,12 +3,16 @@ import './SelectThiefNFT.css';
 import { CONTRACT_ADDRESS, transformPlayerData } from '../../constants';
 import thiefABIJson from '../../utils/Thief.json';
 import { ethers } from 'ethers';
-
+import LoadingIndicator from "../../Components/LoadingIndicator";
 
 const SelectThiefNFT = ({ setThiefNFT }) => {
+    // varaible to store nft to options
     const [thiefs, setThiefs] = useState([]);
     const [gameContract, setGameContract] = useState(null);
 
+    const [mintingNFT, setMintingNFT] = useState(false);
+
+    // effect to load contract
     useEffect(() => {
         const { ethereum } = window;
       
@@ -27,7 +31,7 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
         }
     }, []);
 
-
+    // effect to get nft options and set up event listener for on mint
     useEffect(() => {
         const getThiefClans = async () => {
           try {
@@ -48,9 +52,9 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
           }
         };
 
-        const onThiefMint = async (sender, tokenId, playerIndex) => {
+        const onThiefMint = async (sender, tokenId, nftTypeIndex) => {
             console.log(
-              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} playerIndex: ${playerIndex.toNumber()}`
+              `ThiefNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} nftTypeIndex: ${nftTypeIndex.toNumber()}`
             );
         
             if (gameContract) {
@@ -75,46 +79,66 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
         }
 
       }, [gameContract]);
-
     // Render Methods
-    const renderThiefNFTs = () =>
-    thiefs.map((thief, index) => (
-    <div className="character-item" key={thief.clan}>
-        <div className="name-container">
-        <p>{thief.clan}</p>
+    const renderThiefNFTs = () => {
+      return thiefs.map((thief, index) => (
+        <div className={`thief-nft-item ${thief.color}`} key={thief.clan}>
+            <div className='image-container'>
+              <img src={"https://gateway.pinata.cloud/ipfs/" + thief.imageURI.slice(7, thief.imageURI.length)} alt={thief.clan} />
+            </div>
+            <div className="info-wrapper">
+              <div className="nft-details">
+                <h4>Clan {thief.clan}</h4>
+                <p>Class #{thief.class.toString()}</p>
+              </div>
+              <button
+                type="button"
+                className="nft-mint-button"
+                onClick={()=> mintThiefNFTAction(index)}
+              >Mint</button>
+            </div>
         </div>
-        <img src={"https://gateway.pinata.cloud/ipfs/" + thief.imageURI.slice(7, thief.imageURI.length)} alt={thief.clan} />
-        <button
-        type="button"
-        className="character-mint-button"
-        onClick={()=> mintThiefNFTAction(index)}
-        >{`Mint ${thief.color + " " + thief.clan}`}</button>
-    </div>
-    ));
-
+      ));
+    }
+    
+    // NFT mint function
     const mintThiefNFTAction = async (thiefID) => {
         try {
           if (gameContract) {
+            setMintingNFT(true);
             console.log('Minting thief NFT in progress...');
             const mintTxn = await gameContract.mintThiefNFT(thiefID);
             await mintTxn.wait();
             console.log('mintTxn:', mintTxn);
+            setMintingNFT(false);
           }
         } catch (error) {
           console.warn('MintThiefNFTAction Error:', error);
+          setMintingNFT(false);
+          alert('Error: failed in minting your NFT, please check you have enough funds :)');
         }
     };
 
     return (
-        <div className="select-character-container">
+        <div className="select-thieft-nft-container">
             <h2>Which wise clan would you wish to join?</h2>
             {thiefs.length > 0 && (
-                <div className="character-grid">{renderThiefNFTs()}</div>
+                <div className="nft-grid">{renderThiefNFTs()}</div>
+            )}
+            {mintingNFT && (
+              <div className="loading">
+                <div className="indicator">
+                  <LoadingIndicator />
+                  <p>Minting In Progress...</p>
+                </div>
+                <img
+                  src="https://c.tenor.com/Z8GdGNlTC5oAAAAC/ready-to-rob-pops-mask.gif"
+                  alt="Minting loading indicator"
+                />
+              </div>
             )}
         </div>
     );
 };
-
-
 
 export default SelectThiefNFT;
