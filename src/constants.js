@@ -1,7 +1,8 @@
-const CONTRACT_ADDRESS = '0xf09D50bD2E6C8df0d7785179b9e52b1b16a1C8Fa';
+const CONTRACT_ADDRESS = '0xEc61Dd17BCCe3C713d1c5F46C7d4EA0Ee14c6372';
 
 const transformPlayerData = (playerData) => {
     return {
+        itemId: playerData.itemId,
         clan: playerData.clan,
         color: playerData.color,
         imageURI: playerData.imageURI,
