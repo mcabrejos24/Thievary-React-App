@@ -17,11 +17,15 @@ const Arena = ({ thiefNFT }) => {
 
     const stealADagger = async (playerItemId) => {
       try {
-        let victimAddress = tokenIdToPlayer.get(playerItemId);
-        let stealTxn = await gameContract.steal(victimAddress);
-        await stealTxn.wait();
-        console.log('stealTxn:', stealTxn);
-        setStealState('Successful Stole!');
+        if(gameContract) {
+          setStealState("stealing");
+          console.log("Stealing a dagger...");
+          let victimAddress = tokenIdToPlayer.get(playerItemId);
+          let stealTxn = await gameContract.steal(victimAddress);
+          await stealTxn.wait();
+          console.log('stealTxn:', stealTxn);
+          setStealState('Successful Stole!');
+        }
       } catch (error) {
         console.error('Error stealing from a player:', error);
         setStealState('');
@@ -76,8 +80,8 @@ const Arena = ({ thiefNFT }) => {
               // skip rendering your player
               if(thiefNFT.itemId.toString() === player.itemId.toString()) continue;
               finalRender.push(
-                <div className="player-card-container">
-                  <div className={`player-item ${player.color}`} key={player.clan}>
+                <div className="player-card-container" key={player.itemId.toString()}>
+                  <div className={`player-item ${player.color}`}>
                     <div className='image-container'>
                       <img src={"https://gateway.pinata.cloud/ipfs/" + player.imageURI.slice(7, player.imageURI.length)} alt={player.clan} />
                       <p className="player-class">Level: {player.level.toString()}</p>
@@ -119,11 +123,11 @@ const Arena = ({ thiefNFT }) => {
     return (
       <div className="arena-container">
         {thiefNFT && (
-          <div className="player-card-container">
-            <div class="player-card-title-wrapper">
+          <div className="player-card-container" key={thiefNFT.itemId.toString()}>
+            <div className="player-card-title-wrapper">
               <h2 className="player-card-title">Your Player Card: </h2>
             </div>
-            <div className={`player-item ${thiefNFT.color}`} key={thiefNFT.clan}>
+            <div className={`player-item ${thiefNFT.color}`}>
               <div className='image-container'>
                 <img src={"https://gateway.pinata.cloud/ipfs/" + thiefNFT.imageURI.slice(7, thiefNFT.imageURI.length)} alt={thiefNFT.clan} />
                 <p className="player-class">Level: {thiefNFT.level.toString()}</p>

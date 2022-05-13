@@ -5,6 +5,7 @@ import { CONTRACT_ADDRESS, transformPlayerData } from './constants';
 import thiefABIJson from './utils/Thief.json';
 import { ethers } from 'ethers';
 import Arena from './Components/Arena';
+import LoadingIndicator from './Components/LoadingIndicator';
 
 // Constants
 
@@ -12,6 +13,9 @@ const App = () => {
   // store user's public address
   const [currentAccount, setCurrentAccount] = useState(null);
   const [thiefNFT, setThiefNFT] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const checkNetwork = async () => {
     try { 
@@ -30,6 +34,7 @@ const App = () => {
 
       if (!ethereum) {
         console.log('Make sure you have MetaMask!');
+        setIsLoading(false);
         return;
       } else {
         console.log('We have the ethereum object', ethereum);
@@ -50,6 +55,7 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const connectWalletAction = async () => {
@@ -74,6 +80,9 @@ const App = () => {
 
   // Render Methods
   const renderContent = () => {
+    if (isLoading) {
+      return <LoadingIndicator />;
+    }
     if (!currentAccount) {
       return (
         <div className="connect-wallet-container">
@@ -88,7 +97,7 @@ const App = () => {
       /*
       * Scenario #2
       */
-    } else if (currentAccount && !thiefNFT) {
+    } else if (currentAccount && thiefNFT) {
       return <SelectThiefNFT setThiefNFT={setThiefNFT} />;
     } else if (currentAccount && thiefNFT) {
       return <Arena thiefNFT={thiefNFT} />;
@@ -96,6 +105,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     checkIfWalletIsConnected();
   }, []);
 
@@ -119,6 +129,8 @@ const App = () => {
       } else {
         console.log('No character NFT found');
       }
+
+      setIsLoading(false);
     };
   
     // We only want to run this, if we have a connected wallet

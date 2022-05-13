@@ -3,12 +3,14 @@ import './SelectThiefNFT.css';
 import { CONTRACT_ADDRESS, transformPlayerData } from '../../constants';
 import thiefABIJson from '../../utils/Thief.json';
 import { ethers } from 'ethers';
-
+import LoadingIndicator from "../../Components/LoadingIndicator";
 
 const SelectThiefNFT = ({ setThiefNFT }) => {
     // varaible to store nft to options
     const [thiefs, setThiefs] = useState([]);
     const [gameContract, setGameContract] = useState(null);
+
+    const [mintingNFT, setMintingNFT] = useState(false);
 
     // effect to load contract
     useEffect(() => {
@@ -103,13 +105,17 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
     const mintThiefNFTAction = async (thiefID) => {
         try {
           if (gameContract) {
+            setMintingNFT(true);
             console.log('Minting thief NFT in progress...');
             const mintTxn = await gameContract.mintThiefNFT(thiefID);
             await mintTxn.wait();
             console.log('mintTxn:', mintTxn);
+            setMintingNFT(false);
           }
         } catch (error) {
           console.warn('MintThiefNFTAction Error:', error);
+          setMintingNFT(false);
+          alert('Error: failed in minting your NFT, please check you have enough funds :)');
         }
     };
 
@@ -118,6 +124,18 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
             <h2>Which wise clan would you wish to join?</h2>
             {thiefs.length > 0 && (
                 <div className="nft-grid">{renderThiefNFTs()}</div>
+            )}
+            {!mintingNFT && (
+              <div className="loading">
+                <div className="indicator">
+                  <LoadingIndicator />
+                  <p>Minting In Progress...</p>
+                </div>
+                <img
+                  src="https://c.tenor.com/Z8GdGNlTC5oAAAAC/ready-to-rob-pops-mask.gif"
+                  alt="Minting loading indicator"
+                />
+              </div>
             )}
         </div>
     );
