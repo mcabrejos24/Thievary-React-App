@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import { CONTRACT_ADDRESS, transformPlayerData } from '../../constants';
 import thiefABIJson from '../../utils/Thief.json';
 import './Arena.css';
+import LoadingIndicator from "../../Components/LoadingIndicator";
 
 const Arena = ({ thiefNFT }) => {
     // State
@@ -13,13 +14,14 @@ const Arena = ({ thiefNFT }) => {
 
     const [tokenIdToPlayer, setTokenIdToPlayer] = useState(new Map());
 
+
     const stealADagger = async (playerItemId) => {
       try {
+        let victimAddress = tokenIdToPlayer.get(playerItemId);
+        let stealTxn = await gameContract.steal(victimAddress);
+        await stealTxn.wait();
+        console.log('stealTxn:', stealTxn);
         setStealState('Successful Stole!');
-
-        // let victimAddress = tokenIdToPlayer.get(playerItemId);
-        // let stealTxn = await gameContract.steal(victimAddress);
-        // await stealTxn.wait();
       } catch (error) {
         console.error('Error stealing from a player:', error);
         setStealState('');
@@ -58,15 +60,13 @@ const Arena = ({ thiefNFT }) => {
                 setTokenIdToPlayer(prev => new Map([...prev, [playerInfo.itemId.toString(), allPlayersTxn[i].toString()]]));
             }
             setAllPlayers([...playerArr]);
-            console.log(allPlayers);
-            console.log('above');
         }
 
         if(gameContract) {
             fetchAllPlayers();
         }
 
-    }, [gameContract]);
+    }, [gameContract, stealState]);
         
     // function to render all other players that have minted an NFT
     const renderOtherPlayers = () => {
@@ -80,7 +80,7 @@ const Arena = ({ thiefNFT }) => {
                   <div className={`player-item ${player.color}`} key={player.clan}>
                     <div className='image-container'>
                       <img src={"https://gateway.pinata.cloud/ipfs/" + player.imageURI.slice(7, player.imageURI.length)} alt={player.clan} />
-                      <p className="player-class">Class #{player.class.toString()}</p>
+                      <p className="player-class">Level: {player.level.toString()}</p>
                     </div>
                     <div className="info-wrapper">
                         <div className="player-stats">
@@ -113,8 +113,6 @@ const Arena = ({ thiefNFT }) => {
               </div>
             </div>
           );
-  
-      
       }
     }
 
@@ -128,7 +126,7 @@ const Arena = ({ thiefNFT }) => {
             <div className={`player-item ${thiefNFT.color}`} key={thiefNFT.clan}>
               <div className='image-container'>
                 <img src={"https://gateway.pinata.cloud/ipfs/" + thiefNFT.imageURI.slice(7, thiefNFT.imageURI.length)} alt={thiefNFT.clan} />
-                <p className="player-class">Class #{thiefNFT.class.toString()}</p>
+                <p className="player-class">Level: {thiefNFT.level.toString()}</p>
               </div>
               <div className="info-wrapper">
                   <div className="player-stats">
@@ -146,7 +144,14 @@ const Arena = ({ thiefNFT }) => {
 
         {/* Other Players */}
         {renderOtherPlayers()}
-
+        
+        {/* loading indicator */}
+        {stealState === 'stealing' && (
+          <div className="loading-indicator">
+            <LoadingIndicator />
+            <p>Stealing...shh...</p>
+          </div>
+        )}
       </div>
     );
   };
