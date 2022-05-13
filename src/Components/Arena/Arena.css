@@ -89,6 +89,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px;
 }
 
 .players-container .all-players-card-title-wrapper {
@@ -116,7 +117,22 @@ p {
 }
 
 .steal-button-wrapper .steal-button {
-
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 15px;
+  border-radius: 15px;
+  background-image: linear-gradient(
+    to right,
+    #99f9c5 0%,
+    #1fffc7 0%,
+    #45dfc5 21%,
+    #5eecf0 52%,
+    #2ed3d9 78%,
+    #02afb5 100%
+  );
 }
 
 
@@ -197,15 +213,6 @@ p {
   margin-top: 20px;
   justify-content: center;
 }
-
-.info-wrapper .your-player-details {
-
-}
-
-/* progress.steals-left {
-   */
-/* } */
-
 
 
 .players-container .active-players {
