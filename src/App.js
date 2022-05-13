@@ -60,10 +60,12 @@ const App = () => {
 
   const connectWalletAction = async () => {
     try {
+      setIsLoading(true);
       const { ethereum } = window;
 
       if (!ethereum) {
         alert('Get MetaMask!');
+        setIsLoading(false);
         return;
       }
       // request access to account
@@ -76,6 +78,7 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   // Render Methods
@@ -97,7 +100,7 @@ const App = () => {
       /*
       * Scenario #2
       */
-    } else if (currentAccount && thiefNFT) {
+    } else if (currentAccount && !thiefNFT) {
       return <SelectThiefNFT setThiefNFT={setThiefNFT} />;
     } else if (currentAccount && thiefNFT) {
       return <Arena thiefNFT={thiefNFT} />;
