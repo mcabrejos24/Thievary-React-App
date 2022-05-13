@@ -6,30 +6,22 @@
   color: white;
 }
 
-.arena-container .boss-container {
+.arena-container .loading-indicator {
+  background-color: rgb(168, 178, 171);
+  padding: 15px 25px;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-bottom: 50px;
+  justify-content: center;
+  align-items: center;
+  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.boss-container .boss-content {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  border-radius: 10px;
-  background-image: linear-gradient(
-    to right,
-    #ff8177 0%,
-    #ff867a 0%,
-    #ff8c7f 21%,
-    #f99185 52%,
-    #cf556c 78%,
-    #b12a5b 100%
-  );
-  background-size: 600% 600%;
-  animation: gradient-animation 8s ease infinite;
-  margin-bottom: 25px;
+.arena-container .loading-indicator p {
+  font-weight: bold;
+  font-size: 28px;
 }
 
 .player-stats progress[value] {
