@@ -108,3 +108,34 @@
 
 
 }
+
+
+.select-thieft-nft-container .loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+}
+
+.select-thieft-nft-container .loading .indicator {
+  background-color: rgb(168, 178, 171);
+  padding: 15px 25px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.select-thieft-nft-container .loading .indicator p {
+  font-weight: bold;
+  font-size: 28px;
+  padding-left: 5px;
+}
+
+.select-thieft-nft-container .loading img {
+  width: 450px;
+  padding-top: 25px;
+}
