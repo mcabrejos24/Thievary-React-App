@@ -125,7 +125,7 @@ const SelectThiefNFT = ({ setThiefNFT }) => {
             {thiefs.length > 0 && (
                 <div className="nft-grid">{renderThiefNFTs()}</div>
             )}
-            {!mintingNFT && (
+            {mintingNFT && (
               <div className="loading">
                 <div className="indicator">
                   <LoadingIndicator />
