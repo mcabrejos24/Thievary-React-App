@@ -13,7 +13,7 @@ const Arena = ({ thiefNFT }) => {
     const [stealState, setStealState] = useState('');
 
     const [tokenIdToPlayer, setTokenIdToPlayer] = useState(new Map());
-
+    const [showToast, setShowToast] = useState(false);
 
     const stealADagger = async (playerItemId) => {
       try {
@@ -24,7 +24,12 @@ const Arena = ({ thiefNFT }) => {
           let stealTxn = await gameContract.steal(victimAddress);
           await stealTxn.wait();
           console.log('stealTxn:', stealTxn);
-          setStealState('Successful Stole!');
+          setStealState('Successful Steal!');
+
+          setShowToast(true);
+          setTimeout(() => {
+            setShowToast(false);
+          }, 5000);
         }
       } catch (error) {
         console.error('Error stealing from a player:', error);
@@ -122,6 +127,11 @@ const Arena = ({ thiefNFT }) => {
 
     return (
       <div className="arena-container">
+        {thiefNFT && allPlayers && stealState === "Successful Steal!" && (
+          <div id="toast" className={showToast ? 'show' : ''}>
+            <p id="desc">{`You stole a dagger! Reload to see.`}</p>
+          </div>
+        )}
         {thiefNFT && (
           <div className="player-card-container" key={thiefNFT.itemId.toString()}>
             <div className="player-card-title-wrapper">
