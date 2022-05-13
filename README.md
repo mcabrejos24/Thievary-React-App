@@ -1,6 +1,6 @@
 # The Thief Game Project React Side
 
-This project is a game Dapp where players can mint a THIEF NFT and try to steal from other players.
+[Thievary] is a game Dapp where players can mint a THIEF NFT and try to steal from other players.
 
 All players start with one "dagger" and two "steals". Each player can attempt two steals of a single dagger from any player.
 
@@ -14,6 +14,8 @@ When the steals are reset, any players with 3 or more daggers are leveled up. Al
 Every 100 mints, the NFTs receive a new "class" where the classes start at class 1.
 
 A shield item is also sent on every variable "sendShieldOnNumber" mint. The contract initially sets this variable "sendShieldOnNumber" to 4 on contract creation so this would mean on every 4th mint. However, this number can be updated by the manager at any moment.
+
+You can check out this project here: [https://thievary-react-app.vercel.app/]
 
 ## Getting Started
 
@@ -86,3 +88,5 @@ Any merges to master will automatically deploy to production.
 [thievary_solidity]: https://github.com/mcabrejos24/Thievary-Solidity
 [metamask]: https://metamask.io/
 [vercel]: https://vercel.com/
+[Thievary]: https://thievary-react-app.vercel.app/
+[https://thievary-react-app.vercel.app/]: https://thievary-react-app.vercel.app/
